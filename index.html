@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR QR Scanner</title>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR Мишка</title>
+  <!-- Подключаем A-Frame -->
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <!-- Подключаем AR.js для работы с дополненной реальностью -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-ar.js@1.0.4/dist/aframe-ar.js"></script>
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
 </head>
-<body style="margin: 0; overflow: hidden;">
-    <!-- A-Frame сцена для AR -->
-    <a-scene embedded arjs>
-        <!-- Маркер для AR -->
-        <a-marker preset="hiro">
-            <!-- Модель мишки с GitHub -->
-            <a-entity 
-                gltf-model="https://github.com/mnsch1/polar-bear-ar/edit/main/low_poly_-_polar_bear.glb" 
-                scale="0.5 0.5 0.5" 
-                position="0 0 0">
-            </a-entity>
-        </a-marker>
+<body>
+  <!-- AR-сцена -->
+  <a-scene embedded arjs>
+    <!-- Маркер, который будет использоваться для отображения модели -->
+    <a-marker preset="hiro">
+      <!-- Вставляем модель мишки, путь к модели должен быть правильным -->
+      <a-entity 
+        gltf-model="url(https://mnsch1.github.io/polar-bear-ar/low_poly_-_polar_bear.glb)" 
+        scale="0.5 0.5 0.5"
+        position="0 0 0"
+        animation-mixer>
+      </a-entity>
+    </a-marker>
+    <!-- Камера для отображения -->
+    <a-entity camera></a-entity>
+  </a-scene>
 
-        <!-- Камера -->
-        <a-camera></a-camera>
-    </a-scene>
+  <!-- Добавим текст для отладки -->
+  <div id="debug-info" style="position: absolute; top: 10px; left: 10px; color: white; font-size: 20px;">
+    Загрузка модели...
+  </div>
+
+  <script>
+    // Проверим, что модель загружается
+    var model = document.querySelector('a-entity');
+    model.addEventListener('model-loaded', function () {
+      document.getElementById('debug-info').innerText = 'Модель загружена!';
+    });
+    model.addEventListener('error', function () {
+      document.getElementById('debug-info').innerText = 'Ошибка загрузки модели!';
+    });
+  </script>
 </body>
 </html>
