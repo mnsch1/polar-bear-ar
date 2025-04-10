@@ -1,44 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Polar Bear AR</title>
-    <!-- Подключаем библиотеки A-Frame и AR.js -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR QR Scanner</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-    <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
-      #scene {
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Создаем сцену для AR -->
-    <a-scene
-      embedded
-      arjs
-      renderer="logarithmicDepthBuffer: true;"
-      vr-mode-ui="enabled: false"
-    >
-      <!-- AR Marker -->
-      <a-marker preset="hiro">
-        <!-- Модель медведя в формате .glb -->
-        <a-entity
-          gltf-model="low_poly_-_polar_bear.glb"
-          scale="0.1 0.1 0.1"
-          position="0 0 0"
-          rotation="0 180 0"
-        ></a-entity>
-      </a-marker>
-      <!-- Камера для отображения AR -->
-      <a-entity camera></a-entity>
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <!-- A-Frame сцена для AR -->
+    <a-scene embedded arjs>
+        <!-- Маркер для AR -->
+        <a-marker preset="hiro">
+            <!-- Модель мишки с GitHub -->
+            <a-entity 
+                gltf-model="https://github.com/mnsch1/polar-bear-ar/edit/main/low_poly_-_polar_bear.glb" 
+                scale="0.5 0.5 0.5" 
+                position="0 0 0">
+            </a-entity>
+        </a-marker>
+
+        <!-- Камера -->
+        <a-camera></a-camera>
     </a-scene>
-  </body>
+</body>
 </html>
